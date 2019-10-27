@@ -8,14 +8,13 @@
       <!-- 表单 -->
       <el-form status-icon :rules="LoginRules" ref="loginForm" :model="LoginForm">
         <el-form-item prop="mobile">
-          <el-input v-model="LoginForm.mobile" placeholder="请输入手机号" maxlength="11" v-focus></el-input>
+          <el-input v-model="LoginForm.mobile" placeholder="请输入手机号" v-focus></el-input>
         </el-form-item>
         <el-form-item prop="code">
           <el-input
             v-model="LoginForm.code"
             placeholder="请输入验证码"
             style="width:240px; margin-right:8px"
-            maxlength="6"
           ></el-input>
           <el-button>发送验证码</el-button>
         </el-form-item>
@@ -72,7 +71,19 @@ export default {
       // 1.先对表单元素先加一个ref属性
       this.$refs['loginForm'].validate(value => {
         if (value) {
-          // 进行跳转   发送请求
+          // 验证成功  进行登录   发送请求axios
+          // post(url,参数对象)
+          // get(url,{params : 参数对象})
+          this.$http
+            .post('authorizations', this.LoginForm) // promise对象
+            .then(res => {
+              // 成功 通过编程式导航跳转到首页
+              this.$router.push('/')
+            })
+            .catch(() => {
+              // 失败
+              this.$message.error('手机号或者验证码错误')
+            })
         }
       })
     }

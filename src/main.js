@@ -6,6 +6,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import router from '@/router' // 引入路由模块  会默认去找index.js
 
+import axios from '@/api' // 引入axios    挂载axios   不是基于Vue的插件  所以不能使用use
+Vue.prototype.$http = axios
+
 Vue.use(ElementUI) // 全局安装了ElementUI
 
 Vue.config.productionTip = false
