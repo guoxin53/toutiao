@@ -6,15 +6,16 @@
       <!-- login -->
       <img src="../../assets/logo_index.png" />
       <!-- 表单 -->
-      <el-form :model="LoginForm">
-        <el-form-item>
-          <el-input v-model="LoginForm.mobole" placeholder="请输入手机号" v-focus></el-input>
+      <el-form status-icon :rules="LoginRules" ref="loginForm" :model="LoginForm">
+        <el-form-item prop="mobile">
+          <el-input v-model="LoginForm.mobile" placeholder="请输入手机号" maxlength="11" v-focus></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="code">
           <el-input
             v-model="LoginForm.code"
             placeholder="请输入验证码"
             style="width:240px; margin-right:8px"
+            maxlength="6"
           ></el-input>
           <el-button>发送验证码</el-button>
         </el-form-item>
@@ -22,7 +23,7 @@
           <el-checkbox :value="true">我已经同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit" style="width:100%">立即创建</el-button>
+          <el-button type="primary" @click="login" style="width:100%">登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -32,10 +33,28 @@
 <script>
 export default {
   data () {
+    const checkMobile = (rule, value, callback) => {
+      if (/^1[3-9]\d{9}$/.test(value)) {
+        callback()
+      } else {
+        callback(new Error('请输入正确的手机格式'))
+      }
+    }
     return {
       LoginForm: {
         mobile: '',
         code: ''
+      },
+      LoginRules: {
+        mobile: [
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+          { min: 11, max: 11, message: '请输入11位的手机号', trigger: 'blur' },
+          { validator: checkMobile, trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          { min: 6, max: 6, message: '请输入6位数的验证码', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -45,6 +64,17 @@ export default {
       inserted (dom) {
         dom.querySelector('input').focus()
       }
+    }
+  },
+  methods: {
+    login () {
+      // 对整个表单进行校验
+      // 1.先对表单元素先加一个ref属性
+      this.$refs['loginForm'].validate(value => {
+        if (value) {
+          // 进行跳转   发送请求
+        }
+      })
     }
   }
 }
