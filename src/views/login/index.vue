@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import local from '@/utils/local'
 export default {
   data () {
     const checkMobile = (rule, value, callback) => {
@@ -41,8 +42,8 @@ export default {
     }
     return {
       LoginForm: {
-        mobile: '',
-        code: ''
+        mobile: '19666666666',
+        code: '246810'
       },
       LoginRules: {
         mobile: [
@@ -77,7 +78,10 @@ export default {
           this.$http
             .post('authorizations', this.LoginForm) // promise对象
             .then(res => {
-              // 成功 通过编程式导航跳转到首页
+              // 成功 res 是响应对象  res.data是响应主体
+              // 保存用户信息(token)
+              local.setUser(res.data.data)
+              // 通过编程式导航跳转到首页
               this.$router.push('/')
             })
             .catch(() => {
