@@ -67,27 +67,40 @@ export default {
     }
   },
   methods: {
+    // 登录
     login () {
       // 对整个表单进行校验
       // 1.先对表单元素先加一个ref属性
-      this.$refs['loginForm'].validate(value => {
+      this.$refs['loginForm'].validate(async value => {
         if (value) {
           // 验证成功  进行登录   发送请求axios
           // post(url,参数对象)
           // get(url,{params : 参数对象})
-          this.$http
-            .post('authorizations', this.LoginForm) // promise对象
-            .then(res => {
-              // 成功 res 是响应对象  res.data是响应主体
-              // 保存用户信息(token)
-              local.setUser(res.data.data)
-              // 通过编程式导航跳转到首页
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 失败
-              this.$message.error('手机号或者验证码错误')
-            })
+          // this.$http
+          //   .post('authorizations', this.LoginForm) // promise对象
+          //   .then   res => {
+          //     // 成功 res 是响应对象  res.data是响应主体
+          //     // 保存用户信息(token)
+          //     local.setUser(res.data.data)
+          //     // 通过编程式导航跳转到首页
+          //     this.$router.push('/')
+          //   })
+          //   .catch(() => {
+          //     // 失败
+          //     this.$message.   error('手机号或者验证码错误')
+          //   })`
+          // exception s异常 意外 报错
+          // 成功的结果  以下代码可能出现异常(报错)   使用try{可能报错的代码}catch(e){处理}
+          try {
+            const {
+              data: { data }
+            } = await this.$http.post('authorizations', this.LoginForm)
+            local.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            // 出异常就用catch处理一下
+            this.$message.error('手机号或者验证码错误')
+          }
         }
       })
     }

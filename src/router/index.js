@@ -1,10 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '@/views/login'
-import home from '@/views/home'
-import welcome from '@/views/welcome'
-import NotFound from '@/views/404'
+import Vue from 'vue' // vue框架
+import VueRouter from 'vue-router' // 路由插件
+import Login from '@/views/login' // 登录
+import Home from '@/views/home' // 首页
+import Welcome from '@/views/welcome' // 欢迎
+import NotFound from '@/views/404' // 404
 import local from '@/utils/local' // 操本地用户信息的模块工具 根据本存储的信息
+import Article from '@/views/article' // 内容
 
 Vue.use(VueRouter) // 全局使用
 /**
@@ -26,12 +27,17 @@ const router = new VueRouter({
     // 首页
     {
       path: '/',
-      component: home,
-      children: [{
-        // 欢迎
-        path: '/',
-        component: welcome
-      }]
+      component: Home,
+      // 二级路由
+      children: [
+        {
+          // 欢迎
+          path: '/',
+          component: Welcome
+        },
+        // 内容管理
+        { path: '/article', component: Article }
+      ]
     },
     // 404处理 匹配不到路由时
     {
