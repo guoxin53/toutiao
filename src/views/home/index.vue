@@ -15,9 +15,10 @@
       <!-- :collapse-transition="false"  是否开启折叠动画 -->
       <!-- 1. 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 -->
       <!-- 2. router  当一个属性为布尔时  有这个属性为true 没有为false -->
+      <!-- 当地址栏改变时，根据地址栏来激活对应的菜单项。 -->
       <!-- 导航菜单 -->
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -196,9 +197,6 @@ export default {
         vertical-align: middle;
       }
     }
-  }
-  .el-main {
-    padding: 0;
   }
 }
 </style>
