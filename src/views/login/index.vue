@@ -6,9 +6,18 @@
       <!-- login -->
       <img src="../../assets/logo_index.png" />
       <!-- 表单 -->
-      <el-form status-icon :rules="LoginRules" ref="loginForm" :model="LoginForm">
+      <el-form
+        status-icon
+        :rules="LoginRules"
+        ref="loginForm"
+        :model="LoginForm"
+      >
         <el-form-item prop="mobile">
-          <el-input v-model="LoginForm.mobile" placeholder="请输入手机号" v-focus></el-input>
+          <el-input
+            v-model="LoginForm.mobile"
+            placeholder="请输入手机号"
+            v-focus
+          ></el-input>
         </el-form-item>
         <el-form-item prop="code">
           <el-input
@@ -22,7 +31,11 @@
           <el-checkbox :value="true">我已经同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="login" style="width:100%">登录</el-button>
+          <el-button
+            type="primary"
+            @click="login"
+            style="width:100%"
+          >登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>

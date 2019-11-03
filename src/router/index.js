@@ -5,7 +5,12 @@ import Home from '@/views/home' // 首页
 import Welcome from '@/views/welcome' // 欢迎
 import NotFound from '@/views/404' // 404
 import local from '@/utils/local' // 操本地用户信息的模块工具 根据本存储的信息
-import Article from '@/views/article' // 内容
+import Article from '@/views/article' // 内容管理
+import Image from '@/views/image' // 素材管理
+import Publish from '@/views/publish' // 发布文章
+import Comment from '@/views/comment' // 评论管理
+import Fans from '@/views/fans' // 粉丝管理
+import Setting from '@/views/setting' // 个人管理
 
 Vue.use(VueRouter) // 全局使用
 /**
@@ -36,7 +41,17 @@ const router = new VueRouter({
           component: Welcome
         },
         // 内容管理
-        { path: '/article', component: Article }
+        { path: '/article', component: Article },
+        // 素材管理
+        { path: '/image', component: Image },
+        // 发布文章
+        { path: '/publish', component: Publish },
+        // 评论管理
+        { path: '/comment', component: Comment },
+        // 粉丝管理
+        { path: '/fans', component: Fans },
+        // 个人管理
+        { path: '/setting', component: Setting }
       ]
     },
     // 404处理 匹配不到路由时

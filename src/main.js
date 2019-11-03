@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -11,6 +10,8 @@ import axios from '@/api' // 引入axios    挂载axios   不是基于Vue的插�
 // import MyBread from '@/components/my-bread' // 我的面包屑组件
 // Vue.component('my-bread', MyBread) // 注册全局用component面包屑组件   局部是components
 import plugin from '@/components' // 导入插件
+import '@/styles/index.less'
+
 Vue.use(plugin) // 全局注册插件
 
 Vue.prototype.$http = axios // 把axios添加到vue的prototype原型对象上

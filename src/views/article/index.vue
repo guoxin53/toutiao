@@ -145,16 +145,18 @@
       <!-- page-size 默认一页显示10条 -->
       <!-- current-page 指定当前激活的按钮 -->
       <!-- @current-change="pager"  作用：页码发生改变触发  默认传入当前新的页码 -->
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        style="margin-top:20px"
-        :page-size="reqParams.per_page"
-        :current-page="reqParams.page"
-        @current-change="pager"
-      >
-      </el-pagination>
+      <div style="text-align: center;">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="total"
+          style="margin-top:20px"
+          :page-size="reqParams.per_page"
+          :current-page="reqParams.page"
+          @current-change="pager"
+        >
+        </el-pagination>
+      </div>
     </el-card>
   </div>
 </template>
