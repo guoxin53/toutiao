@@ -8,89 +8,38 @@
     <div class="btn_box">
       <!-- 全部与收藏 -->
       <!-- label 指定选中当前单选框的值  因为是布尔类型的值-->
-      <el-radio-group
-        v-model="reqParams.collect"
-        size="small"
-        @change="totalList"
-      >
+      <el-radio-group v-model="reqParams.collect" size="small" @change="totalList">
         <el-radio-button :label="false">全部</el-radio-button>
         <el-radio-button :label="true">收藏</el-radio-button>
       </el-radio-group>
-      <el-button
-        type="success"
-        size="small"
-        style="float:right"
-        @click="open"
-      >添加素材</el-button>
+      <el-button type="success" size="small" style="float:right" @click="open">添加素材</el-button>
     </div>
     <!-- 对话框 -->
-    <el-dialog
-      title="添加素材"
-      :visible.sync="dialogVisible"
-      width="300px"
-      :on-success="handleSuccess"
-    >
+    <el-dialog title="添加素材" :visible.sync="dialogVisible" width="300px" :on-success="handleSuccess">
       <span>
         <!-- :on-success="handleSuccess"   上传成功时的回调函数
           name="image"   后台规定好的参数名
           :headers="headers"   设置请求头  获取token
             -->
-        <el-upload
-          class="avatar-uploader"
-          action="http://ttapi.research.itcast.cn/mp/v1_0/user/images"
-          :show-file-list="false"
-          :headers="headers"
-          name="image"
-          :on-success="handleSuccess"
-        >
-          <img
-            v-if="imageUrl"
-            :src="imageUrl"
-            class="avatar"
-          >
-          <i
-            v-else
-            class="el-icon-plus avatar-uploader-icon"
-          ></i>
+        <el-upload class="avatar-uploader" action="http://ttapi.research.itcast.cn/mp/v1_0/user/images" :show-file-list="false" :headers="headers" name="image" :on-success="handleSuccess">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </span>
     </el-dialog>
     <!-- 素材区域 -->
     <div class="img_list">
-      <div
-        class="img_item"
-        v-for="item in images"
-        :key="item.id"
-      >
+      <div class="img_item" v-for="item in images" :key="item.id">
         <img :src="item.url">
-        <div
-          class="footer"
-          v-show="!reqParams.collect"
-        >
-          <span
-            class="el-icon-star-off"
-            style="cursor:pointer;"
-            :class="{red : item.is_collected}"
-            @click="tooggleStaus(item)"
-          ></span>
-          <span
-            class="el-icon-delete"
-            style="cursor:pointer;"
-            @click="deleteImage(item.id)"
-          ></span>
+        <div class="footer" v-show="!reqParams.collect">
+          <span class="el-icon-star-off" style="cursor:pointer;" :class="{red : item.is_collected}" @click="tooggleStaus(item)"></span>
+          <span class="el-icon-delete" style="cursor:pointer;" @click="deleteImage(item.id)"></span>
         </div>
       </div>
     </div>
     <!-- 分页 -->
     <div style="text-align: center;">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        :page-size="reqParams.per_page"
-        :current-page="reqParams.page"
-        @current-change="pager"
-      >
+      <el-pagination background layout="prev, pager, next" :total="total" :page-size="reqParams.per_page" :current-page="reqParams.page" @current-change="pager">
       </el-pagination>
     </div>
   </el-card>

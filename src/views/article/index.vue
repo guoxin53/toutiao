@@ -8,10 +8,7 @@
         <my-bread>内容管理</my-bread>
       </div>
       <!-- 表单控件部分 -->
-      <el-form
-        label-width="80px"
-        size="small"
-      >
+      <el-form label-width="80px" size="small">
         <!-- 状态部分 -->
         <!-- 单选框 -->
         <el-form-item label="状态:">
@@ -36,23 +33,12 @@
         <!-- 日期选择器   选择日期范围-->
         <el-form-item label="日期:">
           <!-- v-model 绑定的值是[起始日期,结束日期]  type="daterange"日期范围不加是一个值-->
-          <el-date-picker
-            v-model="dateArr"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            @change="changeDate"
-            value-format="yyyy-MM-dd"
-          >
+          <el-date-picker v-model="dateArr" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="changeDate" value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-form-item>
         <!-- 筛选按钮 -->
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="search"
-          >筛选</el-button>
+          <el-button type="primary" @click="search">筛选</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -67,75 +53,36 @@
         <!-- 自定义列 封面 -->
         <el-table-column label="封面">
           <template slot-scope="scope">
-            <el-image
-              :src="scope.row.cover.images[0]"
-              style="width:150px;height:100px"
-            >
+            <el-image :src="scope.row.cover.images[0]" style="width:150px;height:100px">
               <!-- 当图片加载失败时，显示一下面的图 -->
               <div slot="error">
-                <img
-                  src="../../assets/error.gif"
-                  style="width:150px;height:100px"
-                >
+                <img src="../../assets/error.gif" style="width:150px;height:100px">
               </div>
             </el-image>
           </template>
         </el-table-column>
 
         <!-- 普通列   标题 -->
-        <el-table-column
-          prop="title"
-          label="标题"
-        >
+        <el-table-column prop="title" label="标题">
         </el-table-column>
 
         <el-table-column label="状态">
           <template slot-scope="scope">
-            <el-tag
-              v-if="scope.row.status===0"
-              type="info"
-            >草稿</el-tag>
+            <el-tag v-if="scope.row.status===0" type="info">草稿</el-tag>
             <el-tag v-if="scope.row.status===1">待审核</el-tag>
-            <el-tag
-              v-if="scope.row.status===2"
-              type="success"
-            >审核通过</el-tag>
-            <el-tag
-              v-if="scope.row.status===3"
-              type="warning"
-            >审核失败</el-tag>
-            <el-tag
-              v-if="scope.row.status===4"
-              type="danger"
-            >以删除</el-tag>
+            <el-tag v-if="scope.row.status===2" type="success">审核通过</el-tag>
+            <el-tag v-if="scope.row.status===3" type="warning">审核失败</el-tag>
+            <el-tag v-if="scope.row.status===4" type="danger">以删除</el-tag>
           </template>
         </el-table-column>
         <!-- 普通列   发布时间 -->
-        <el-table-column
-          prop="pubdate"
-          label="发布时间"
-        >
+        <el-table-column prop="pubdate" label="发布时间">
         </el-table-column>
 
-        <el-table-column
-          label="操作"
-          width="120px"
-        >
+        <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              circle
-              plain
-              @click="toEdit(scope.row.id)"
-            ></el-button>
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              plain
-              @click="delArticle(scope.row.id)"
-            ></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle plain @click="toEdit(scope.row.id)"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle plain @click="delArticle(scope.row.id)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -146,15 +93,7 @@
       <!-- current-page 指定当前激活的按钮 -->
       <!-- @current-change="pager"  作用：页码发生改变触发  默认传入当前新的页码 -->
       <div style="text-align: center;">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="total"
-          style="margin-top:20px"
-          :page-size="reqParams.per_page"
-          :current-page="reqParams.page"
-          @current-change="pager"
-        >
+        <el-pagination background layout="prev, pager, next" :total="total" style="margin-top:20px" :page-size="reqParams.per_page" :current-page="reqParams.page" @current-change="pager">
         </el-pagination>
       </div>
     </el-card>
