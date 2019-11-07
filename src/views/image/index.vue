@@ -21,6 +21,7 @@
           name="image"   后台规定好的参数名
           :headers="headers"   设置请求头  获取token
             -->
+        <!-- 上传文件 -->
         <el-upload class="avatar-uploader" action="http://ttapi.research.itcast.cn/mp/v1_0/user/images" :show-file-list="false" :headers="headers" name="image" :on-success="handleSuccess">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
